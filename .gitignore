@@ -1,0 +1,19 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Secrets
+*.pem
+*.key
+*.p12
+*.pfx
+
+# AWS credentials
+.aws/
+
+# Docker
+**/.docker/
+
+# Logs
+*.log
