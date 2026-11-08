@@ -10,7 +10,7 @@ export const authService = {
     },
 
     login : async (credentials) => {
-        const response = await apiClient.get("/auth/login", credentials);
+        const response = await apiClient.post("/auth/login", credentials);
         return response.data;
     },
 };

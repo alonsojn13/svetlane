@@ -5,48 +5,55 @@ import { useForm } from "react-hook-form";
 import useAuth from "./hooks/useAuth";
 
 function Auth() {
-
   const [step, setStep] = useState(1);
 
-  const {registerUser, loginUser} = useAuth();
-  
-
- 
-
-  const onSubmit = (data) => {
-    console.log(data);
-    registerUser(data);
-  };
+  const nextStep = () => setStep(step+1);
+  const backStep = () => { if (step > 1) {setStep(step-1);}} 
 
 
+  const { 
+    registerUser, 
+    loginUser,
+    loginData } = useAuth();
 
-
-   const schemaForm = z.object({
-    email: z
-    .string(),
-    
-    password: z
-    .string(),
-
-  })
-
-    const {
-    register: registerForm,
-    handleSubmit,
-    formState: { errors : errorsForm },
-  } = useForm({
-    resolver: zodResolver(schemaForm)
+  const registerSchema = z.object({
+    name: z.string(),
+    email: z.string(),
+    password: z.string(),
   });
 
+  const loginSchema = z.object({
+    email: z.string(),
+    password: z.string(),
+  });
 
-  const { reset } = useForm();
+  // Create the form with their schema.
+  const registerForm = useForm({ resolver: zodResolver(registerSchema) });
+  const loginForm = useForm({ resolver: zodResolver(loginSchema) });
 
-  const clean = () => {
-    reset({
-      email: "nuevo@email.com",
-      password: "Nuevo usuario",
-    });
+  // Assign to each form their field, btns, errors.
+  const {
+    register: loginField,
+    handleSubmit: handleLoginSubmit,
+    formState: { errors: loginErrors },
+  } = loginForm;
+  const {
+    register: registerField,
+    handleSubmit: handleRegisterSubmit,
+    formState: { errors: registerErrors },
+  } = registerForm;
+
+  //
+  const sendFormLogin = (data) => {
+    loginUser(data);
   };
+
+  const sendFormRegister = (data) => {
+    loginUser(data);
+  };
+
+
+  console.log(loginData)
 
   return (
     <div>
@@ -56,27 +63,50 @@ function Auth() {
         <div>
           <h1>Register</h1>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="text" placeholder="email" {...registerForm("email")} />
-          {errorsForm.email && <p>Mensaje de error</p> }
-        
+          <form onSubmit={handleRegisterSubmit(sendFormRegister)}>
+            <input type="text" placeholder="name" {...registerField("name")} />
+            {registerErrors.name && <p>Mensaje de error</p>}
+
+            <input type="text" placeholder="email" {...registerField("email")} />
+            {registerErrors.email && <p>Mensaje de error</p>}
+
             <input
               type="text"
               placeholder="password"
-              {...registerForm("password")}
+              {...registerField("password")}
             />
 
             <button type="submit">Register</button>
-            <button onClick={() => clean()}>Reset</button>
+            <button type="reset">Reset</button>
           </form>
+
+                <button onClick={nextStep}>Login</button>
+
         </div>
       )}
 
       {step == 2 && (
         <div>
           <h1>Login</h1>
+
+          <form onSubmit={handleLoginSubmit(sendFormLogin)}>
+            <input type="text" placeholder="email" {...loginField("email")} />
+            {loginErrors.email && <p>Mensaje de error</p>}
+
+            <input
+              type="text"
+              placeholder="password"
+              {...loginField("password")}
+            />
+            {loginErrors.password && <p>Mensaje de error</p>}
+
+            <button type="submit">Login</button>
+            <button type="reset">Reset</button>
+          </form>
+          <button onClick={backStep}>Register</button>
         </div>
       )}
+
     </div>
   );
 }
