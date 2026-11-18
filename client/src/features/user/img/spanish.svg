@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-labelledby="title">
+  <title id="title">Flag of Spain</title>
+  <rect width="320" height="200" fill="#AA151B"/>
+  <rect y="50" width="320" height="100" fill="#F1BF00"/>
+  <g transform="translate(92 78)" fill="none" stroke="#AA151B" stroke-width="3">
+    <path d="M0 0h20v42H0z"/>
+    <path d="M5 7h10M5 14h10M5 21h10M5 28h10M5 35h10"/>
+    <path d="M20 8c12-8 18-8 28 0v27c-10 8-16 8-28 0z"/>
+  </g>
+</svg>

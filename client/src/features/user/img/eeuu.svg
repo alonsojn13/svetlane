@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-labelledby="title">
+  <title id="title">Flag of the United States</title>
+  <rect width="320" height="200" fill="#fff"/>
+  <g fill="#B22234">
+    <rect width="320" height="15.385" y="0"/><rect width="320" height="15.385" y="30.769"/>
+    <rect width="320" height="15.385" y="61.538"/><rect width="320" height="15.385" y="92.307"/>
+    <rect width="320" height="15.385" y="123.076"/><rect width="320" height="15.385" y="153.845"/>
+    <rect width="320" height="15.385" y="184.615"/>
+  </g>
+  <rect width="128" height="107.7" fill="#3C3B6E"/>
+  <g fill="#fff">
+    <g id="row"><circle cx="10" cy="10" r="2.4"/><circle cx="30" cy="10" r="2.4"/><circle cx="50" cy="10" r="2.4"/><circle cx="70" cy="10" r="2.4"/><circle cx="90" cy="10" r="2.4"/><circle cx="110" cy="10" r="2.4"/></g>
+    <use href="#row" y="20"/><use href="#row" y="40"/><use href="#row" y="60"/><use href="#row" y="80"/>
+    <g transform="translate(10 20)"><circle cx="10" cy="0" r="2.4"/><circle cx="30" cy="0" r="2.4"/><circle cx="50" cy="0" r="2.4"/><circle cx="70" cy="0" r="2.4"/><circle cx="90" cy="0" r="2.4"/><circle cx="110" cy="0" r="2.4"/></g>
+  </g>
+</svg>

@@ -10,27 +10,32 @@ import { Input } from "@/components/ui/input";
 
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarImage,
+} from "@/components/ui/avatar";
 
 function Auth() {
   const [step, setStep] = useState(1);
   const { loginUser } = useAuth();
 
   // Helper Functions
-  
+
   const nextStep = () => setStep(step + 1);
+
   const backStep = () => {
     if (step > 1) {
       setStep(step - 1);
     }
   };
-
 
   // Schemas:
 
@@ -46,11 +51,9 @@ function Auth() {
     password: z.string(),
   });
 
-
   // Forms with schema:
   const registerForm = useForm({ resolver: zodResolver(registerSchema) });
   const loginForm = useForm({ resolver: zodResolver(loginSchema) });
-
 
   // Assign to each form their field, btns, errors.
   const {
@@ -74,72 +77,131 @@ function Auth() {
   };
 
   return (
-    <div className="flex min-h-dvh flex-col m-4 ">
-      <header className="flex justify-between mb-6">
-        <h2>Verstane</h2>
-      </header>
+    <div className="flex min-h-dvh flex-col ">
+    
+      {/* Hero */}
+      <section className="mb-3 bg-foreground text-background p-8 rounded-b-4xl">
 
-      <div className="flex-1">
+        <header className="flex justify-between mb-6">
+          <h1>Svetlane</h1>
+        </header>
+
+        <h2 className="text-4xl font-bold mb-6 tracking-tighter">
+          Feel yourself confident <br />{" "}
+          <span className="text-terciary">what your learning.</span>{" "}
+        </h2>
+
+        <div className="flex gap-2 items-center">
+          <AvatarGroup className="flex">
+            <Avatar>
+              <AvatarImage src="./img/user1.png" alt="@shadcn"  />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <Avatar>
+              <AvatarImage
+                src="./img/user2.png"
+                alt="@maxleiter"
+              />
+              <AvatarFallback>LR</AvatarFallback>
+            </Avatar>
+            <Avatar >
+              <AvatarImage
+                src="./img/user3.png"
+                alt="@evilrabbit" 
+              />
+              <AvatarFallback>ER</AvatarFallback>
+            </Avatar>
+            <Avatar >
+              <AvatarImage
+                src="./img/user4.png"
+                alt="@evilrabbit" 
+              />
+              <AvatarFallback>ER</AvatarFallback>
+            </Avatar>
+          </AvatarGroup>
+
+          <span className="text-sm text-terciary">+500 people feel confident speaking.</span>
+        </div>
+      </section>
+
+      {/* Form */}
+      <div className="m-3">
+
+        {/* Login */}
         {step == 1 && (
-          <form onSubmit={handleLoginSubmit(sendFormLogin)}>
-            <Card>
-              <CardHeader>
-                <CardTitle>I was waiting you.</CardTitle>
-                <CardDescription>...</CardDescription>
-                <CardAction onClick={nextStep}>Sign up</CardAction>
-              </CardHeader>
-
-              <CardContent>
-                <div className="flex flex-col gap-6">
-                  <div className="grid gap-2">
-                    <Label>Email</Label>
-                    <Input
-                      type="text"
-                      placeholder="jane@example.com"
-                      {...loginField("email")}
-                    />
-                    {loginErrors.email && <p>Mensaje de error</p>}
-                  </div>
-
-                  <div className="grid gap-2">
-                    <div className="flex justify-between items-center">
-                      <Label>Password</Label>
-                      <a href="">Forgot your password?</a>
-                    </div>
-                    <Input
-                      type="text"
-                      placeholder="***********"
-                      {...loginField("password")}
-                    />
-                    {loginErrors.password && <p>Mensaje de error</p>}
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="flex-col gap-2">
-                <Button type="submit" size="lg" className={"w-full"}>
-                  Login
-                </Button>
-                <Button
-                  variant="outline"
-                  type="submit"
-                  size="lg"
-                  className={"w-full"}
-                >
-                  Login with Google
-                </Button>
-              </CardFooter>
-            </Card>
-          </form>
-        )}
-
-        {step == 2 && (
           <div>
-            <form onSubmit={handleRegisterSubmit(sendFormRegister)}>
+            <form onSubmit={handleLoginSubmit(sendFormLogin)} className="mb-3">
               <Card>
                 <CardHeader>
+                  <CardTitle>I was waiting you.</CardTitle>
+                  <CardDescription>
+                    It's great to see you're alive.
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent>
+                  <div className="flex flex-col gap-6">
+                    <div className="grid gap-2">
+                      <Label>Email</Label>
+                      <Input
+                        type="text"
+                        placeholder="jane@example.com"
+                        {...loginField("email")}
+                      />
+                      {loginErrors.email && <p>Mensaje de error</p>}
+                    </div>
+
+                    <div className="grid gap-2">
+                      <div className="flex justify-between items-center">
+                        <Label>Password</Label>
+                        <a href="">Forgot your password?</a>
+                      </div>
+                      <Input
+                        type="text"
+                        placeholder="***********"
+                        {...loginField("password")}
+                      />
+                      {loginErrors.password && <p>Mensaje de error</p>}
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter className="flex-col gap-2">
+                  <Button type="submit" size="lg" className={"w-full"}>
+                    Login
+                  </Button>
+                </CardFooter>
+              </Card>
+            </form>
+
+            <section className="flex flex-col text-center gap-3">
+              <span>Or continue with</span>
+
+              <section className="flex gap-2">
+                <Button variant="secondary" className={"flex-1"}>
+                  <img src="/icons/google.svg" alt="" className="h-6" />
+                </Button>
+                <Button variant="secondary" className={"flex-1"}>
+                  <img src="/icons/apple.svg" alt="" className="h-6" />
+                </Button>
+              </section>
+
+              <p>
+                Don't you have an account?{" "}
+                <b onClick={nextStep}>Register</b>{" "}
+              </p>
+            </section>
+          </div>
+        )}
+
+
+        {/* Register */}
+        {step == 2 && (
+          <div>
+            <form onSubmit={handleRegisterSubmit(sendFormRegister)} className="mb-3">
+              <Card className="pt-0">
+                <CardHeader>
                   <CardTitle>Starts the Adventure.</CardTitle>
-                  <CardDescription>See.</CardDescription>
-                  <CardAction onClick={backStep}>Log in</CardAction>
+                  <CardDescription>French, Spanish, English...</CardDescription>
                 </CardHeader>
 
                 <CardContent>
@@ -193,23 +255,30 @@ function Auth() {
                   <Button type="submit" size="lg" className={"w-full"}>
                     Register
                   </Button>
-                  <Button
-                    variant="outline"
-                    type="submit"
-                    size="lg"
-                    className={"w-full"}
-                  >
-                    Register with Google
-                  </Button>
                 </CardFooter>
               </Card>
             </form>
+
+             <section className="flex flex-col text-center gap-3">
+              <span>Or continue with</span>
+
+              <section className="flex gap-2">
+                <Button variant="secondary" className={"flex-1"}>
+                  <img src="/icons/google.svg" alt="" className="h-6" />
+                </Button>
+                <Button variant="secondary" className={"flex-1"}>
+                  <img src="/icons/apple.svg" alt="" className="h-6" />
+                </Button>
+              </section>
+
+              <p>
+                Don't you have an account?{" "}
+                <b onClick={backStep}>Login</b>{" "}
+              </p>
+            </section>
           </div>
         )}
       </div>
-      <footer className="flex self-end">
-        <p>© {new Date().getFullYear()} Verstane. All rights reserved. </p>
-      </footer>
     </div>
   );
 }
